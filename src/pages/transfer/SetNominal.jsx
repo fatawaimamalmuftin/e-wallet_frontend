@@ -92,7 +92,7 @@ const SetNominal = () => {
             type="submit"
             className="w-full sm:w-auto px-8 py-3 bg-primary text-white font-medium text-sm rounded-xl hover:bg-primary/90 transition shadow-sm cursor-pointer"
           >
-            Continue & Transfer
+            Continue &amp; Transfer
           </button>
         </form>
       </div>
