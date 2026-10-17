@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import bri from '../../assets/bri.svg'
-import dana from '../../assets/dana.svg'
-import bca from '../../assets/bca.svg'
-import gopay from '../../assets/gopay.svg'
-import ovo from '../../assets/ovo.svg'
+import bri from '../../assets/bri.svg';
+import dana from '../../assets/dana.svg';
+import bca from '../../assets/bca.svg';
+import gopay from '../../assets/gopay.svg';
+import ovo from '../../assets/ovo.svg';
 
 const PAYMENT_METHODS = [
   {
@@ -39,7 +39,7 @@ export default function TopUpPage() {
 
   const numAm = parseFloat(amount) || 0;
   const deliveryFee = 0;
-  const taxFee = numAm ? 4000 : 0; 
+  const taxFee = numAm ? 4000 : 0;
   const subTotal = numAm + deliveryFee + taxFee;
 
   const formatRupiah = (val) => {
@@ -58,115 +58,80 @@ export default function TopUpPage() {
   };
 
   return (
-    <div className="min-h-screen bg-white font-sans text-dark">
-      <div className="border-b border-gray-100 bg-white">
-        <div className="container flex items-center gap-3 py-4 text-dark">
-          <svg
-            className="h-5 w-5 text-primary"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24">
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth="2"
-              d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-            />
-          </svg>
-          <h1 className="text-lg font-bold">Top Up Account</h1>
+    <div className="min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
+        <div className="mb-6">
+          <h1 className="text-2xl font-bold text-gray-900">Top Up Balance</h1>
+          <p className="text-sm text-dark-gray mt-1">
+            Choose your payment method and enter the amount you want to top up.
+          </p>
         </div>
-      </div>
 
-      <div className="section-container">
-        <form
-          onSubmit={handleSubmit}
-          className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:items-start">
-          <div className="space-y-8 lg:col-span-7 xl:col-span-8">
-            <div>
-              <h2 className="mb-3 text-base font-bold text-dark">
+        <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+          <div className="lg:col-span-7 xl:col-span-8 space-y-6">
+            <div className="bg-white rounded-2xl border border-dark-gray/10 p-6 shadow-sm">
+              <h2 className="text-sm font-semibold text-gray-900 uppercase tracking-wider mb-4">
                 Account Information
               </h2>
-              <div className="flex items-center gap-4 rounded-2xl bg-gray/30 p-4">
+              <div className="flex items-center gap-4 rounded-xl bg-gray-50 p-4 border border-gray-100">
                 <img
                   src="https://i.pinimg.com/736x/c2/95/ee/c295ee30c2a52643e6c6def2178547e6.jpg"
                   alt="Sigma Cat Wizard"
                   className="h-16 w-16 rounded-xl object-cover"
                 />
                 <div>
-                  <h3 className="text-base font-bold text-dark">
-                    Sigma Cat Wizard
-                  </h3>
-                  <p className="text-sm text-dark-gray">(239) 555–0108</p>
-                  <span className="mt-1 inline-flex items-center gap-1 rounded-md bg-primary px-2.5 py-0.5 text-xs font-semibold text-white">
-                    <svg
-                      className="h-3.5 w-3.5 fill-current"
-                      viewBox="0 0 20 20">
-                      <path d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" />
-                    </svg>
+                  <h3 className="font-bold text-gray-900">Sigma Cat Wizard</h3>
+                  <p className="text-sm text-dark-gray mt-0.5">(239) 555-0108</p>
+                  <span className="mt-1.5 inline-flex items-center gap-1 rounded-full bg-emerald-50 text-emerald-600 px-2.5 py-0.5 text-xs font-semibold">
                     Verified
                   </span>
                 </div>
               </div>
             </div>
 
-            <div>
-              <h2 className="text-base font-bold text-dark">Amount</h2>
-              <p className="mt-0.5 text-xs text-dark-gray">
-                Type the amount you want to transfer to your e-wallet account
+            <div className="bg-white rounded-2xl border border-dark-gray/10 p-6 shadow-sm space-y-3">
+              <h2 className="text-sm font-semibold text-gray-900 uppercase tracking-wider">
+                Top Up Amount
+              </h2>
+              <p className="text-xs text-dark-gray">
+                Enter the amount you would like to deposit into your account.
               </p>
-              <div className="relative mt-3">
-                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-4 text-dark-gray">
-                  <svg
-                    className="h-5 w-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24">
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M3 10h18M7 15h1m4 0h1m-7 4h12a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                    />
-                  </svg>
-                </div>
+              <div className="border border-dark-gray/30 rounded-xl px-4 py-3 flex items-center gap-3 focus-within:border-primary transition-colors bg-white">
+                <span className="font-bold text-dark-gray">Rp</span>
                 <input
                   type="number"
                   value={amount}
                   onChange={(e) => setAmount(e.target.value)}
-                  placeholder="Enter Nominal Transfer"
-                  className="no-scrollbar-number w-full rounded-xl border border-gray-200 py-3.5 pl-11 pr-4 text-sm font-medium text-dark placeholder:text-dark-gray/60 focus:border-primary focus:outline-none"
+                  placeholder="0"
+                  className="w-full text-base font-semibold outline-none bg-transparent"
                 />
               </div>
             </div>
 
-            <div>
-              <h2 className="text-base font-bold text-dark">Payment Method</h2>
-              <p className="mt-0.5 text-xs text-dark-gray">
-                Choose your payment method for top up account
-              </p>
-
-              <div className="mt-4 space-y-3">
+            <div className="bg-white rounded-2xl border border-dark-gray/10 p-6 shadow-sm space-y-4">
+              <h2 className="text-sm font-semibold text-gray-900 uppercase tracking-wider">
+                Select Payment Method
+              </h2>
+              <div className="space-y-3">
                 {PAYMENT_METHODS.map((method) => {
                   const isSelected = selectedMethod === method.id;
                   return (
                     <label
                       key={method.id}
                       onClick={() => setSelectedMethod(method.id)}
-                      className={`flex cursor-pointer items-center justify-between rounded-2xl p-4 transition-all ${
+                      className={`flex cursor-pointer items-center justify-between rounded-xl p-4 transition-all border ${
                         isSelected
-                          ? "bg-gray/40 ring-1 ring-primary/20"
-                          : "bg-gray/20 hover:bg-gray/30"
-                      }`}>
+                          ? "border-primary bg-primary/5 ring-1 ring-primary"
+                          : "border-gray-200 hover:border-gray-300 bg-white"
+                      }`}
+                    >
                       <div className="flex items-center gap-4">
                         <div
                           className={`flex h-5 w-5 items-center justify-center rounded-full border ${
-                            isSelected
-                              ? "border-primary bg-primary"
-                              : "border-gray-400 bg-white"
-                          }`}>
-                          {isSelected && (
-                            <div className="h-2 w-2 rounded-full bg-white" />
-                          )}
+                            isSelected ? "border-primary bg-primary" : "border-gray-300 bg-white"
+                          }`}
+                        >
+                          {isSelected && <div className="h-2 w-2 rounded-full bg-white" />}
                         </div>
 
                         <div className="flex h-8 w-12 items-center justify-center">
@@ -177,9 +142,7 @@ export default function TopUpPage() {
                           />
                         </div>
 
-                        <span className="text-sm font-semibold text-dark">
-                          {method.name}
-                        </span>
+                        <span className="text-sm font-medium text-gray-800">{method.name}</span>
                       </div>
                     </label>
                   );
@@ -198,16 +161,14 @@ export default function TopUpPage() {
             </div>
           </div>
 
-          <div className="hidden lg:col-span-5 lg:block xl:col-span-4">
-            <div className="sticky top-6 rounded-3xl border border-gray-100 bg-white p-6 shadow-sm">
-              <PaymentSummary
-                numAm={numAm}
-                deliveryFee={deliveryFee}
-                taxFee={taxFee}
-                subTotal={subTotal}
-                formatRupiah={formatRupiah}
-              />
-            </div>
+          <div className="hidden lg:col-span-5 lg:block xl:col-span-4 sticky top-6">
+            <PaymentSummary
+              numAm={numAm}
+              deliveryFee={deliveryFee}
+              taxFee={taxFee}
+              subTotal={subTotal}
+              formatRupiah={formatRupiah}
+            />
           </div>
         </form>
       </div>
@@ -215,51 +176,40 @@ export default function TopUpPage() {
   );
 }
 
-// Sub-komponen Ringkasan Pembayaran
-function PaymentSummary({
-  numAm,
-  deliveryFee,
-  taxFee,
-  subTotal,
-  formatRupiah,
-}) {
+function PaymentSummary({ numAm, deliveryFee, taxFee, subTotal, formatRupiah }) {
   return (
-    <div className="space-y-6">
-      <h2 className="text-base font-bold text-dark">Payment</h2>
+    <div className="bg-white rounded-2xl border border-dark-gray/10 p-6 shadow-sm space-y-5">
+      <h2 className="text-base font-bold text-gray-900">Payment Summary</h2>
 
       <div className="space-y-3 border-b border-gray-100 pb-4 text-sm font-medium">
         <div className="flex justify-between text-dark-gray">
-          <span>Order</span>
-          <span className="font-bold text-dark">
-            {formatRupiah(numAm)}
-          </span>
+          <span>Amount</span>
+          <span className="font-semibold text-gray-900">{formatRupiah(numAm)}</span>
         </div>
         <div className="flex justify-between text-dark-gray">
-          <span>Delivery</span>
-          <span className="font-bold text-dark">
-            {formatRupiah(deliveryFee)}
-          </span>
+          <span>Delivery Fee</span>
+          <span className="font-semibold text-gray-900">{formatRupiah(deliveryFee)}</span>
         </div>
         <div className="flex justify-between text-dark-gray">
-          <span>Tax</span>
-          <span className="font-bold text-dark">{formatRupiah(taxFee)}</span>
+          <span>Admin / Tax Fee</span>
+          <span className="font-semibold text-gray-900">{formatRupiah(taxFee)}</span>
         </div>
       </div>
 
-      <div className="flex justify-between text-base font-bold text-dark">
-        <span>Sub Total</span>
-        <span>{formatRupiah(subTotal)}</span>
+      <div className="flex justify-between text-base font-bold text-gray-900">
+        <span>Total Payment</span>
+        <span className="text-primary">{formatRupiah(subTotal)}</span>
       </div>
 
       <button
         type="submit"
-        className="w-full rounded-2xl bg-primary py-3.5 text-center text-sm font-bold text-white shadow-lg shadow-primary/25 transition-all hover:bg-primary/90 active:scale-[0.99]"
+        className="w-full rounded-xl bg-primary py-3.5 text-center text-sm font-bold text-white shadow-sm transition hover:bg-primary/90 cursor-pointer"
       >
-        Submit
+        Submit Top Up
       </button>
 
       <p className="text-center text-xs leading-relaxed text-dark-gray">
-        *Get Discount if you pay with Bank Central Asia
+        *Instant confirmation after payment verification
       </p>
     </div>
   );

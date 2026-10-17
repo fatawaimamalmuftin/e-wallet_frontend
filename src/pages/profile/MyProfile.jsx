@@ -1,62 +1,104 @@
 import { FiEdit } from "react-icons/fi";
 import { HiOutlineMail } from "react-icons/hi";
-import { LuPhone, LuUserRound } from "react-icons/lu";
+import { LuPhone, LuUserRound, LuLock, LuShieldCheck } from "react-icons/lu";
 import { Link } from "react-router";
 
 const MyProfile = () => {
   return (
-    <section className="container w-full lg:border rounded-lg lg:border-dark-gray/20">
-      <div className="grid grid-cols-4 grid-rows-8 lg:grid-cols-8 lg:grid-rows-4 gap-6">
-        <div className="rounded-lg overflow-hidden col-span-2 row-span-2">
-          <img
-            className="w-full h-full"
-            src="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
-            alt="profile-img"
-          />
+    <section className="bg-white rounded-2xl border border-dark-gray/10 p-6 sm:p-8 shadow-sm">
+      <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 pb-6 border-b border-dark-gray/10">
+        <div className="flex items-center gap-4">
+          <div className="rounded-2xl overflow-hidden w-20 h-20 border border-dark-gray/10 shadow-sm flex-shrink-0">
+            <img
+              className="w-full h-full object-cover"
+              src="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
+              alt="profile-img"
+            />
+          </div>
+          <div>
+            <h1 className="text-lg font-bold text-gray-900">Ghaluh Wizard Anggoro</h1>
+            <p className="text-sm text-dark-gray mt-0.5">ghaluhwizz@gmail.com</p>
+            <span className="inline-block mt-2 text-xs font-medium text-emerald-600 bg-emerald-50 px-2.5 py-0.5 rounded-full">
+              Verified Account
+            </span>
+          </div>
         </div>
-        <div className="col-start-3 lg:col-start-7 col-span-2">
-          <Link className="w-full flex gap-2 items-center justify-center py-3 lg:py-2 px-4 rounded-lg bg-primary text-white text-xs hover:opacity-90 hover:shadow-lg">
-            <FiEdit className="text-lg" />
-            Change Profile
-          </Link>
-        </div>
-        <div className="row-start-3 col-span-4 row-span-2">
-          <div className="grid gap-2">
-            <p className="text-lg lg:text-sm font-medium">Fullname</p>
-            <div className="flex items-start gap-2 text-dark-gray">
-              <LuUserRound className="text-lg" />
-              <p className="text-xs">Ghaluh Wizard Anggoro</p>
+
+        <Link
+          to="/profile/edit"
+          className="inline-flex items-center justify-center gap-2 py-2.5 px-4 rounded-xl bg-primary text-white text-sm font-medium hover:bg-primary/90 transition shadow-sm"
+        >
+          <FiEdit className="text-base" />
+          Edit Profile
+        </Link>
+      </div>
+
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 pt-6">
+        <div className="space-y-4">
+          <h2 className="text-sm font-semibold text-gray-900 uppercase tracking-wider">
+            Personal Information
+          </h2>
+          <div className="space-y-3">
+            <div className="p-3.5 rounded-xl bg-gray-50 border border-gray-100 flex items-center gap-3">
+              <LuUserRound className="text-lg text-dark-gray" />
+              <div>
+                <p className="text-xs text-dark-gray">Full Name</p>
+                <p className="text-sm font-medium text-gray-800">Ghaluh Wizard Anggoro</p>
+              </div>
             </div>
-            <p className="text-lg lg:text-sm font-medium">Phone</p>
-            <div className="flex items-start gap-2 text-dark-gray">
-              <LuPhone className="text-lg" />
-              <p className="text-xs">081239821932</p>
+
+            <div className="p-3.5 rounded-xl bg-gray-50 border border-gray-100 flex items-center gap-3">
+              <LuPhone className="text-lg text-dark-gray" />
+              <div>
+                <p className="text-xs text-dark-gray">Phone Number</p>
+                <p className="text-sm font-medium text-gray-800">+62 812-3982-1932</p>
+              </div>
             </div>
-            <p className="text-lg lg:text-sm font-medium">Email</p>
-            <div className="flex items-start gap-2 text-dark-gray">
-              <HiOutlineMail className="text-lg" />
-              <p className="text-xs">ghaluhwizz@gmail.com</p>
+
+            <div className="p-3.5 rounded-xl bg-gray-50 border border-gray-100 flex items-center gap-3">
+              <HiOutlineMail className="text-lg text-dark-gray" />
+              <div>
+                <p className="text-xs text-dark-gray">Email Address</p>
+                <p className="text-sm font-medium text-gray-800">ghaluhwizz@gmail.com</p>
+              </div>
             </div>
           </div>
         </div>
-        <div className="lg:row-start-3 lg:col-start-7 row-start-5 col-span-4 row-span-2">
-          <div className="grid gap-4">
-            <div className="grid gap-2">
-              <p className="text-sm lg:text-xs font-medium">Password</p>
+
+        <div className="space-y-4">
+          <h2 className="text-sm font-semibold text-gray-900 uppercase tracking-wider">
+            Security Settings
+          </h2>
+          <div className="space-y-3">
+            <div className="p-3.5 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <LuLock className="text-lg text-dark-gray" />
+                <div>
+                  <p className="text-sm font-medium text-gray-800">Password</p>
+                  <p className="text-xs text-dark-gray">Last changed 2 months ago</p>
+                </div>
+              </div>
               <Link
                 to="/change-password"
-                className="text-sm lg:text-xs text-primary hover:underline"
+                className="text-xs font-semibold text-primary hover:underline"
               >
-                Change Password
+                Change
               </Link>
             </div>
-            <div className="grid gap-2">
-              <p className="text-sm lg:text-xs font-medium">Pin</p>
+
+            <div className="p-3.5 rounded-xl bg-gray-50 border border-gray-100 flex items-center justify-between">
+              <div className="flex items-center gap-3">
+                <LuShieldCheck className="text-lg text-dark-gray" />
+                <div>
+                  <p className="text-sm font-medium text-gray-800">Transaction PIN</p>
+                  <p className="text-xs text-dark-gray">6-digit PIN active</p>
+                </div>
+              </div>
               <Link
                 to="/change-pin"
-                className="text-sm lg:text-xs text-primary hover:underline"
+                className="text-xs font-semibold text-primary hover:underline"
               >
-                Change Pin
+                Change
               </Link>
             </div>
           </div>

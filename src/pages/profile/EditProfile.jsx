@@ -9,113 +9,137 @@ const EditProfile = () => {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm();
+  } = useForm({
+    defaultValues: {
+      full_name: "Ghaluh Wizard Anggoro",
+      phone: "081239821932",
+      email: "ghaluhwizz@gmail.com",
+    },
+  });
 
-  const onSubmit = () => {
-    console.log("first");
+  const onSubmit = (data) => {
+    console.log(data);
   };
+
   return (
-    <section className="container w-full lg:border rounded-lg lg:border-dark-gray/20">
-      <div className="flex flex-col justify-between lg:gap-4">
-        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6 lg:gap-4">
-          <div className="grid gap-4 lg:gap-2">
-            <h2 className="font-semibold text-xl lg:text-sm">My Profile</h2>
-            <div className="flex gap-4 lg:gap-2 items-center justify-between lg:justify-start">
-              <div className="rounded-lg overflow-hidden w-6/12 lg:w-26">
-                <img
-                  src="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
-                  alt="profile-img"
-                />
-              </div>
-              <div className="flex flex-col items-center justify-center gap-4 lg:gap-2 h-10/12 w-full lg:w-fit">
-                <Link className="w-full flex gap-2 items-center justify-center py-3 lg:py-2 px-4 rounded-lg bg-primary text-white text-xs hover:opacity-90 hover:shadow-lg">
-                  <FiEdit className="text-lg" />
-                  Change Profile
-                </Link>
-                <Link className="w-full flex gap-2 items-center justify-center py-3 lg:py-2 px-4 rounded-lg border border-red text-red text-xs hover:opacity-90 hover:shadow-lg">
-                  <LuTrash className="text-lg" />
-                  Delete Profile
-                </Link>
-              </div>
-            </div>
-            <p className="text-sm lg:text-xs text-dark-gray">
-              The profile picture must be 512 x 512 pixels or less
+    <section className="bg-white rounded-2xl border border-dark-gray/10 p-6 sm:p-8 shadow-sm">
+      <div className="mb-6">
+        <h1 className="text-xl font-bold text-gray-900">Edit Profile</h1>
+        <p className="text-sm text-dark-gray mt-1">
+          Update your personal details and contact information.
+        </p>
+      </div>
+
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <div className="flex flex-col sm:flex-row items-center gap-6 p-4 rounded-xl bg-gray-50 border border-gray-100">
+          <div className="rounded-2xl overflow-hidden w-20 h-20 border border-dark-gray/10 flex-shrink-0 shadow-sm">
+            <img
+              src="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
+              alt="profile-img"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="flex flex-wrap items-center gap-3">
+            <button
+              type="button"
+              className="flex items-center gap-2 py-2 px-4 rounded-xl bg-primary text-white text-xs font-medium hover:bg-primary/90 transition shadow-sm cursor-pointer"
+            >
+              <FiEdit className="text-sm" />
+              Change Picture
+            </button>
+            <button
+              type="button"
+              className="flex items-center gap-2 py-2 px-4 rounded-xl border border-red-200 text-red-600 bg-white text-xs font-medium hover:bg-red-50 transition cursor-pointer"
+            >
+              <LuTrash className="text-sm" />
+              Delete Picture
+            </button>
+            <p className="w-full text-xs text-dark-gray">
+              Allowed JPG or PNG. Max size 512 x 512 pixels.
             </p>
           </div>
-          <div className="grid gap-2">
-            <label
-              className="text-sm lg:text-xs font-medium"
-              htmlFor="full_name"
-            >
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div className="md:col-span-2">
+            <label className="text-xs font-semibold text-gray-700 mb-1.5 block" htmlFor="full_name">
               Full Name
             </label>
-            <div className="lg:p-2 p-4 text-sm lg:text-xs bg-white rounded-lg border border-gray-300 flex items-center gap-2">
-              <LuUserRound className="text-lg text-dark-gray" />
+            <div
+              className={`border rounded-xl px-4 py-2.5 flex items-center gap-3 transition-colors bg-white ${
+                errors.full_name ? "border-red-500" : "border-dark-gray/30 focus-within:border-primary"
+              }`}
+            >
+              <LuUserRound className="text-dark-gray text-lg" />
               <input
                 id="full_name"
                 type="text"
-                className={`${errors?.full_name?.message && "outline outline-red"}  focus:outline-none w-full`}
                 placeholder="Enter Full Name"
-                {...register("full_name")}
+                className="outline-none w-full text-sm bg-transparent"
+                {...register("full_name", { required: "Full name is required" })}
               />
             </div>
+            <p className="text-xs text-red-500 mt-1 min-h-[1.25rem]">{errors.full_name?.message}</p>
           </div>
-          <div className="grid gap-2">
-            <label className="text-sm lg:text-xs font-medium" htmlFor="phone">
-              Phone
+
+          <div>
+            <label className="text-xs font-semibold text-gray-700 mb-1.5 block" htmlFor="phone">
+              Phone Number
             </label>
-            <div className="lg:p-2 p-4 text-sm lg:text-xs bg-white rounded-lg border border-gray-300 flex items-center gap-2">
-              <LuPhone className="text-lg text-dark-gray" />
+            <div
+              className={`border rounded-xl px-4 py-2.5 flex items-center gap-3 transition-colors bg-white ${
+                errors.phone ? "border-red-500" : "border-dark-gray/30 focus-within:border-primary"
+              }`}
+            >
+              <LuPhone className="text-dark-gray text-lg" />
               <input
                 id="phone"
                 type="text"
-                className={`${errors?.phone?.message && "outline outline-red"}  focus:outline-none w-full`}
-                placeholder="Enter Your Number Phone"
-                {...register("phone")}
+                placeholder="Enter Phone Number"
+                className="outline-none w-full text-sm bg-transparent"
+                {...register("phone", { required: "Phone number is required" })}
               />
             </div>
+            <p className="text-xs text-red-500 mt-1 min-h-[1.25rem]">{errors.phone?.message}</p>
           </div>
-          <div className="grid gap-2">
-            <label className="text-sm lg:text-xs font-medium" htmlFor="email">
-              Email
+
+          <div>
+            <label className="text-xs font-semibold text-gray-700 mb-1.5 block" htmlFor="email">
+              Email Address
             </label>
-            <div className="lg:p-2 p-4 text-sm lg:text-xs bg-white rounded-lg border border-gray-300 flex items-center gap-2">
-              <HiOutlineMail className="text-lg text-dark-gray" />
+            <div
+              className={`border rounded-xl px-4 py-2.5 flex items-center gap-3 transition-colors bg-white ${
+                errors.email ? "border-red-500" : "border-dark-gray/30 focus-within:border-primary"
+              }`}
+            >
+              <HiOutlineMail className="text-dark-gray text-lg" />
               <input
                 id="email"
-                type="text"
-                className={`${errors?.email?.message && "outline outline-red"}  focus:outline-none w-full`}
-                placeholder="Enter Your Email"
-                {...register("email")}
+                type="email"
+                placeholder="Enter Email Address"
+                className="outline-none w-full text-sm bg-transparent"
+                {...register("email", { required: "Email is required" })}
               />
             </div>
+            <p className="text-xs text-red-500 mt-1 min-h-[1.25rem]">{errors.email?.message}</p>
           </div>
-          <div className="grid gap-2">
-            <p className="text-sm lg:text-xs font-medium">Password</p>
-            <Link
-              to="/change-password"
-              className="text-sm lg:text-xs text-primary hover:underline"
-            >
-              Change Password
-            </Link>
-          </div>
-          <div className="grid gap-2">
-            <p className="text-sm lg:text-xs font-medium">Pin</p>
-            <Link
-              to="/change-pin"
-              className="text-sm lg:text-xs text-primary hover:underline"
-            >
-              Change Pin
-            </Link>
-          </div>
+        </div>
+
+        <div className="pt-2 flex flex-col sm:flex-row items-center gap-3">
           <button
             type="submit"
-            className="py-3 lg:py-2 bg-primary text-white rounded-lg hover:opacity-90 hover:shadow-lg cursor-pointer"
+            className="w-full sm:w-auto px-8 py-3 bg-primary text-white font-medium text-sm rounded-xl hover:bg-primary/90 transition shadow-sm cursor-pointer"
           >
-            Submit
+            Save Changes
           </button>
-        </form>
-      </div>
+          <Link
+            to="/profile"
+            className="w-full sm:w-auto px-6 py-3 border border-dark-gray/30 text-gray-700 text-center font-medium text-sm rounded-xl hover:bg-gray-50 transition"
+          >
+            Cancel
+          </Link>
+        </div>
+      </form>
     </section>
   );
 };

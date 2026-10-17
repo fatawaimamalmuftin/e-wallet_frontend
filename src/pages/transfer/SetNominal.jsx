@@ -10,90 +10,89 @@ const SetNominal = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = () => {
-    console.log("first");
+  const onSubmit = (data) => {
+    console.log(data);
   };
 
   return (
-    <section className="container w-full lg:border rounded-lg lg:border-dark-gray/20">
-      <div className="flex flex-col justify-between gap-6">
+    <section className="bg-white rounded-2xl border border-dark-gray/10 p-6 sm:p-8 shadow-sm">
+      <div className="flex flex-col gap-6">
         <div>
-          <h2 className="text-lg font-semibold">People Information</h2>
+          <h1 className="text-xl font-bold text-gray-900">Transfer Confirmation</h1>
+          <p className="text-sm text-dark-gray mt-1">Review the recipient details and enter transfer amount.</p>
         </div>
-        <div className="container bg-dark-gray/10 rounded-lg">
-          <div className="flex items-center justify-between lg">
-            <div className="flex items-center gap-4 justify-start">
-              <div className="rounded-lg overflow-hidden w-20 lg:w-16">
-                <img
-                  src="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
-                  alt="user-image"
-                />
-              </div>
-              <div className="grid gap-2">
-                <p className="lg:text-sm font-semibold">Ghaluh 1</p>
-                <p className="lg:text-sm">(239) 555-0108</p>
-                <div className="flex items-center gap-2 bg-primary text-white w-fit py-0.5 px-3 rounded-lg">
-                  <VscVerified className="text-lg" />
-                  <p className="text-xs">Verified</p>
-                </div>
-              </div>
+
+        <div className="bg-gray-50 rounded-2xl p-4 border border-gray-100 flex items-center justify-between">
+          <div className="flex items-center gap-4">
+            <div className="rounded-xl overflow-hidden w-16 h-16 border border-dark-gray/10">
+              <img
+                src="https://www.gravatar.com/avatar/2c7d99fe281ecd3bcd65ab915bac6dd5?s=250"
+                alt="user"
+                className="w-full h-full object-cover"
+              />
             </div>
-            <div className="p-2 text-2xl cursor-pointer">
-              <CiStar className="text-3xl" />
+            <div>
+              <p className="font-bold text-gray-900">Ghaluh 1</p>
+              <p className="text-xs text-dark-gray mt-0.5">(239) 555-0108</p>
+              <span className="mt-1.5 inline-flex items-center gap-1 bg-primary text-white text-[11px] font-medium py-0.5 px-2.5 rounded-full">
+                <VscVerified className="text-sm" /> Verified
+              </span>
             </div>
           </div>
+          <button
+            type="button"
+            className="p-2 text-dark-gray hover:text-yellow-500 transition cursor-pointer"
+          >
+            <CiStar className="text-2xl" />
+          </button>
         </div>
-        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6">
+
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
           <div>
-            <h2 className="font-semibold">Amount</h2>
-            <p className="text-dark-gray lg:text-sm">
-              Type the amount you want to transfer and then press continue to
-              the next steps.
-            </p>
-          </div>
-          <div>
-            <div className="flex items-center gap-2  py-2 px-4 rounded-lg border border-dark-gray/20">
-              <HiCash className="text-2xl" />
+            <label className="text-xs font-semibold text-gray-700 mb-1.5 block" htmlFor="nominal">
+              Amount
+            </label>
+            <div
+              className={`border rounded-xl px-4 py-3 flex items-center gap-3 transition-colors bg-white ${
+                errors.nominal ? "border-red-500" : "border-dark-gray/30 focus-within:border-primary"
+              }`}
+            >
+              <HiCash className="text-2xl text-dark-gray" />
               <input
                 id="nominal"
-                className="text-lg w-full outline-none lg:text-sm"
+                className="w-full outline-none text-base font-semibold bg-transparent"
                 type="number"
-                placeholder="Enter Nominal Transfer"
+                placeholder="0"
                 {...register("nominal", {
                   required: "Nominal is required",
                   min: {
-                    value: 1,
-                    message: "Minimum transfer is Rp 1",
+                    value: 10000,
+                    message: "Minimum transfer is Rp 10.000",
                   },
                 })}
               />
             </div>
-            <span
-              className={`${errors?.nominal?.message ? "text-red" : "text-gray"} text-[10px]`}
-            >
-              {errors?.nominal?.message || "error"}
-            </span>
+            <p className="text-xs text-red-500 mt-1 min-h-[1.25rem]">{errors.nominal?.message}</p>
           </div>
+
           <div>
-            <h2 className="font-semibold">Notes</h2>
-            <p className="text-dark-gray lg:text-sm">
-              You can add some notes for this transfer such as payment coffee or
-              something
-            </p>
-          </div>
-          <div>
+            <label className="text-xs font-semibold text-gray-700 mb-1.5 block" htmlFor="notes">
+              Notes (Optional)
+            </label>
             <textarea
-              className="p-4 w-full rounded-lg border border-dark-gray/20 lg:text-sm outline-none"
-              rows={8}
-              name="notes"
-              placeholder="Enter Some Notes"
+              id="notes"
+              className="p-4 w-full rounded-xl border border-dark-gray/30 focus:border-primary transition-colors text-sm outline-none resize-none"
+              rows={4}
+              placeholder="e.g. Dinner split, coffee payment"
+              {...register("notes")}
             />
           </div>
+
           <button
             type="submit"
-            className="py-2 px-4 bg-primary text-white rounded-lg cursor-pointer hover:opacity-90 hover:shadow-lg"
+            className="w-full sm:w-auto px-8 py-3 bg-primary text-white font-medium text-sm rounded-xl hover:bg-primary/90 transition shadow-sm cursor-pointer"
           >
-            Submit & Transfer
+            Continue & Transfer
           </button>
         </form>
       </div>

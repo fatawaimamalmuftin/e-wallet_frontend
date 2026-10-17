@@ -7,6 +7,7 @@ const ChangePassword = () => {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm();
 
@@ -16,132 +17,161 @@ const ChangePassword = () => {
     confirm_password: false,
   });
 
-  const onSubmit = () => {
-    console.log("first");
+  const onSubmit = (data) => {
+    console.log(data);
   };
 
-  console.log(showPassword);
+  const newPasswordValue = watch("new_password");
 
   return (
-    <section className="container w-full lg:border rounded-lg lg:border-dark-gray/20">
-      <div className="mb-4">
-        <h2 className="font-semibold text-xl lg:text-sm">Change Password</h2>
+    <section className="bg-white rounded-2xl border border-dark-gray/10 p-6 sm:p-8 shadow-sm max-w-xl">
+      <div className="mb-6">
+        <h1 className="text-xl font-bold text-gray-900">Change Password</h1>
+        <p className="text-sm text-dark-gray mt-1">
+          You must enter your current password before choosing a new one.
+        </p>
       </div>
-      <div className="flex flex-col justify-between lg:gap-4">
-        <form onSubmit={handleSubmit(onSubmit)} className="grid gap-6 lg:gap-4">
-          <div className="grid gap-2">
-            <label
-              className="text-sm lg:text-xs font-medium"
-              htmlFor="existing_password"
-            >
-              Existing Password
-            </label>
-            <div className="lg:p-2 p-4 text-sm lg:text-xs bg-white rounded-lg border border-gray-300 flex items-center gap-2">
-              <TbSquareKey className="text-lg text-dark-gray" />
-              <input
-                id="existing_password"
-                type={showPassword.existing_password ? "text" : "password"}
-                className={`${errors?.existing_password?.message && "outline outline-red"}  focus:outline-none w-full`}
-                placeholder="Enter Your Existing Password"
-                {...register("existing_password")}
-              />
-              <button
-                type="button"
-                onClick={() =>
-                  setShowPassword((prev) => {
-                    return {
-                      ...prev,
-                      existing_password: !prev.existing_password,
-                    };
-                  })
-                }
-                className="text-gray-500 focus:outline-none cursor-pointer"
-              >
-                {showPassword.existing_password ? (
-                  <LuEye size={20} />
-                ) : (
-                  <LuEyeOff size={20} />
-                )}
-              </button>
-            </div>
-          </div>
-          <div className="grid gap-2">
-            <label
-              className="text-sm lg:text-xs font-medium"
-              htmlFor="new_password"
-            >
-              New Password
-            </label>
-            <div className="lg:p-2 p-4 text-sm lg:text-xs bg-white rounded-lg border border-gray-300 flex items-center gap-2">
-              <TbSquareKey className="text-lg text-dark-gray" />
-              <input
-                id="new_password"
-                type={showPassword.new_password ? "text" : "password"}
-                className={`${errors?.new_password?.message && "outline outline-red"}  focus:outline-none w-full`}
-                placeholder="Enter Your New Password"
-                {...register("new_password")}
-              />
-              <button
-                type="button"
-                onClick={() =>
-                  setShowPassword((prev) => {
-                    return { ...prev, new_password: !prev.new_password };
-                  })
-                }
-                className="text-gray-500 focus:outline-none cursor-pointer"
-              >
-                {showPassword.new_password ? (
-                  <LuEye size={20} />
-                ) : (
-                  <LuEyeOff size={20} />
-                )}
-              </button>
-            </div>
-          </div>
-          <div className="grid gap-2">
-            <label
-              className="password-sm lg:text-xs font-medium"
-              htmlFor="confirm_password"
-            >
-              Confirm Password
-            </label>
-            <div className="lg:p-2 p-4 text-sm lg:text-xs bg-white rounded-lg border border-gray-300 flex items-center gap-2">
-              <TbSquareKey className="text-lg text-dark-gray" />
-              <input
-                id="confirm_password"
-                type={showPassword.confirm_password ? "text" : "password"}
-                className={`${errors?.email?.message && "outline outline-red"}  focus:outline-none w-full`}
-                placeholder="Re-type your new password"
-                {...register("confirm_password")}
-              />
-              <button
-                type="button"
-                onClick={() =>
-                  setShowPassword((prev) => {
-                    return {
-                      ...prev,
-                      confirm_password: !prev.confirm_password,
-                    };
-                  })
-                }
-                className="text-gray-500 focus:outline-none cursor-pointer"
-              >
-                {showPassword.confirm_password ? (
-                  <LuEye size={20} />
-                ) : (
-                  <LuEyeOff size={20} />
-                )}
-              </button>
-            </div>
-          </div>
-          <button
-            type="submit"
-            className="py-3 lg:py-2 bg-primary text-white rounded-lg hover:opacity-90 hover:shadow-lg cursor-pointer"
+
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+        <div>
+          <label
+            className="text-xs font-semibold text-gray-700 mb-1.5 block"
+            htmlFor="existing_password"
           >
-            Submit
-          </button>
-        </form>
-      </div>
+            Existing Password
+          </label>
+          <div
+            className={`border rounded-xl px-4 py-2.5 flex items-center gap-3 transition-colors bg-white ${
+              errors.existing_password
+                ? "border-red-500"
+                : "border-dark-gray/30 focus-within:border-primary"
+            }`}
+          >
+            <TbSquareKey className="text-dark-gray text-lg" />
+            <input
+              id="existing_password"
+              type={showPassword.existing_password ? "text" : "password"}
+              placeholder="Enter current password"
+              className="outline-none w-full text-sm bg-transparent"
+              {...register("existing_password", {
+                required: "Current password is required",
+              })}
+            />
+            <button
+              type="button"
+              onClick={() =>
+                setShowPassword((prev) => ({
+                  ...prev,
+                  existing_password: !prev.existing_password,
+                }))
+              }
+              className="text-dark-gray hover:text-gray-700 focus:outline-none cursor-pointer"
+            >
+              {showPassword.existing_password ? <LuEye size={18} /> : <LuEyeOff size={18} />}
+            </button>
+          </div>
+          <p className="text-xs text-red-500 mt-1 min-h-[1.25rem]">
+            {errors.existing_password?.message}
+          </p>
+        </div>
+
+        <div>
+          <label
+            className="text-xs font-semibold text-gray-700 mb-1.5 block"
+            htmlFor="new_password"
+          >
+            New Password
+          </label>
+          <div
+            className={`border rounded-xl px-4 py-2.5 flex items-center gap-3 transition-colors bg-white ${
+              errors.new_password
+                ? "border-red-500"
+                : "border-dark-gray/30 focus-within:border-primary"
+            }`}
+          >
+            <TbSquareKey className="text-dark-gray text-lg" />
+            <input
+              id="new_password"
+              type={showPassword.new_password ? "text" : "password"}
+              placeholder="Enter new password"
+              className="outline-none w-full text-sm bg-transparent"
+              {...register("new_password", {
+                required: "New password is required",
+                minLength: {
+                  value: 8,
+                  message: "Password must be at least 8 characters",
+                },
+              })}
+            />
+            <button
+              type="button"
+              onClick={() =>
+                setShowPassword((prev) => ({
+                  ...prev,
+                  new_password: !prev.new_password,
+                }))
+              }
+              className="text-dark-gray hover:text-gray-700 focus:outline-none cursor-pointer"
+            >
+              {showPassword.new_password ? <LuEye size={18} /> : <LuEyeOff size={18} />}
+            </button>
+          </div>
+          <p className="text-xs text-red-500 mt-1 min-h-[1.25rem]">
+            {errors.new_password?.message}
+          </p>
+        </div>
+
+        <div>
+          <label
+            className="text-xs font-semibold text-gray-700 mb-1.5 block"
+            htmlFor="confirm_password"
+          >
+            Confirm Password
+          </label>
+          <div
+            className={`border rounded-xl px-4 py-2.5 flex items-center gap-3 transition-colors bg-white ${
+              errors.confirm_password
+                ? "border-red-500"
+                : "border-dark-gray/30 focus-within:border-primary"
+            }`}
+          >
+            <TbSquareKey className="text-dark-gray text-lg" />
+            <input
+              id="confirm_password"
+              type={showPassword.confirm_password ? "text" : "password"}
+              placeholder="Re-type new password"
+              className="outline-none w-full text-sm bg-transparent"
+              {...register("confirm_password", {
+                required: "Please confirm your password",
+                validate: (value) =>
+                  value === newPasswordValue || "Passwords do not match",
+              })}
+            />
+            <button
+              type="button"
+              onClick={() =>
+                setShowPassword((prev) => ({
+                  ...prev,
+                  confirm_password: !prev.confirm_password,
+                }))
+              }
+              className="text-dark-gray hover:text-gray-700 focus:outline-none cursor-pointer"
+            >
+              {showPassword.confirm_password ? <LuEye size={18} /> : <LuEyeOff size={18} />}
+            </button>
+          </div>
+          <p className="text-xs text-red-500 mt-1 min-h-[1.25rem]">
+            {errors.confirm_password?.message}
+          </p>
+        </div>
+
+        <button
+          type="submit"
+          className="w-full sm:w-auto px-8 py-3 bg-primary text-white font-medium text-sm rounded-xl hover:bg-primary/90 transition shadow-sm cursor-pointer mt-2"
+        >
+          Update Password
+        </button>
+      </form>
     </section>
   );
 };

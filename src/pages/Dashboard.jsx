@@ -27,7 +27,7 @@ export default function Dashboard() {
         backgroundColor: "#ff2a57",
         borderRadius: 6,
         borderSkipped: false,
-        barThickness: 32,
+        barThickness: 28,
       },
     ],
   };
@@ -54,7 +54,7 @@ export default function Dashboard() {
           display: false,
         },
         ticks: {
-          color: "#ff2a57",
+          color: "#9ca3af",
           font: {
             size: 12,
           },
@@ -65,17 +65,17 @@ export default function Dashboard() {
         max: 100000,
         ticks: {
           stepSize: 25000,
-          color: "#ff2a57",
+          color: "#9ca3af",
           font: {
             size: 10,
           },
           callback: (value) => {
             if (value === 0) return "0";
-            return `${value / 1000}.000`;
+            return `${value / 1000}k`;
           },
         },
         grid: {
-          color: "#4f5665",
+          color: "#f3f4f6",
         },
         border: {
           dash: [4, 4],
@@ -85,343 +85,168 @@ export default function Dashboard() {
     },
   };
 
-  const transactionsMob = [
+  const transactions = [
     {
       id: 1,
-      name: "Floyd 1",
-      type: "Send",
-      amount: "-Rp50.000",
-      isIncome: false,
-      avatar: "https://i.pinimg.com/736x/c2/95/ee/c295ee30c2a52643e6c6def2178547e6.jpg",
-    },
-    {
-      id: 2,
-      name: "Floyd 2",
-      type: "Send",
-      amount: "+Rp50.000",
+      name: "Robert Fox",
+      type: "Transfer",
+      amount: "+Rp 50.000",
       isIncome: true,
       avatar: "https://i.pinimg.com/736x/c2/95/ee/c295ee30c2a52643e6c6def2178547e6.jpg",
     },
     {
-      id: 3,
-      name: "Floyd 3",
-      type: "Send",
-      amount: "-Rp50.000",
-      isIncome: false,
-      avatar: "https://i.pinimg.com/736x/c2/95/ee/c295ee30c2a52643e6c6def2178547e6.jpg",
-    },
-    {
-      id: 4,
+      id: 2,
       name: "Floyd Miles",
       type: "Send",
-      amount: "-Rp50.000",
+      amount: "-Rp 50.000",
       isIncome: false,
       avatar: "https://i.pinimg.com/736x/c2/95/ee/c295ee30c2a52643e6c6def2178547e6.jpg",
     },
-  ];
-
-  const transactionsDesk = [
-    {
-      id: 1,
-      name: "Robert",
-      type: "Transfer",
-      amount: "+Rp50.000",
-      isIncome: true,
-      avatar:
-        "https://i.pinimg.com/736x/c2/95/ee/c295ee30c2a52643e6c6def2178547e6.jpg",
-    },
-    {
-      id: 2,
-      name: "Floyd",
-      type: "Send",
-      amount: "-Rp50.000",
-      isIncome: false,
-      avatar:
-        "https://i.pinimg.com/736x/c2/95/ee/c295ee30c2a52643e6c6def2178547e6.jpg",
-    },
     {
       id: 3,
-      name: "Ujang",
+      name: "Ujang Supriatna",
       type: "Send",
-      amount: "-Rp50.000",
+      amount: "-Rp 50.000",
       isIncome: false,
-      avatar:
-        "https://i.pinimg.com/736x/c2/95/ee/c295ee30c2a52643e6c6def2178547e6.jpg",
+      avatar: "https://i.pinimg.com/736x/c2/95/ee/c295ee30c2a52643e6c6def2178547e6.jpg",
     },
     {
       id: 4,
-      name: "Asep",
+      name: "Asep Surasep",
       type: "Transfer",
-      amount: "+Rp50.000",
+      amount: "+Rp 50.000",
       isIncome: true,
-      avatar:
-        "https://i.pinimg.com/736x/c2/95/ee/c295ee30c2a52643e6c6def2178547e6.jpg",
+      avatar: "https://i.pinimg.com/736x/c2/95/ee/c295ee30c2a52643e6c6def2178547e6.jpg",
     },
     {
       id: 5,
-      name: "Reva",
+      name: "Reva Alvira",
       type: "Transfer",
-      amount: "+Rp50.000",
+      amount: "+Rp 50.000",
       isIncome: true,
-      avatar:
-        "https://i.pinimg.com/736x/c2/95/ee/c295ee30c2a52643e6c6def2178547e6.jpg",
-    },
-    {
-      id: 6,
-      name: "Thanos",
-      type: "Send",
-      amount: "-Rp50.000",
-      isIncome: false,
-      avatar:
-        "https://i.pinimg.com/736x/c2/95/ee/c295ee30c2a52643e6c6def2178547e6.jpg",
-    },
-    {
-      id: 7,
-      name: "Bunjay",
-      type: "Transfer",
-      amount: "+Rp50.000",
-      isIncome: true,
-      avatar:
-        "https://i.pinimg.com/736x/c2/95/ee/c295ee30c2a52643e6c6def2178547e6.jpg",
-    },
-    {
-      id: 8,
-      name: "Adisurya",
-      type: "Send",
-      amount: "-Rp50.000",
-      isIncome: false,
-      avatar:
-        "https://i.pinimg.com/736x/c2/95/ee/c295ee30c2a52643e6c6def2178547e6.jpg",
-    },
-    {
-      id: 9,
-      name: "Miguel",
-      type: "Transfer",
-      amount: "+Rp50.000",
-      isIncome: true,
-      avatar:
-        "https://i.pinimg.com/736x/c2/95/ee/c295ee30c2a52643e6c6def2178547e6.jpg",
+      avatar: "https://i.pinimg.com/736x/c2/95/ee/c295ee30c2a52643e6c6def2178547e6.jpg",
     },
   ];
 
   return (
-    <div className="bg-gray-50 min-h-screen pb-10 lg:p-8">
-      <div className="bg-primary h-28 w-full block lg:hidden" />
+    <div className="bg-gray-50 min-h-screen p-4 sm:p-6 lg:p-8">
+      <div className="max-w-7xl mx-auto space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          <div className="bg-white p-6 rounded-2xl border border-dark-gray/10 shadow-sm flex flex-col justify-between">
+            <div>
+              <div className="flex items-center gap-2 text-primary">
+                <GiMoneyStack className="text-2xl" />
+                <span className="text-dark-gray text-xs font-semibold uppercase tracking-wider">
+                  Total Balance
+                </span>
+              </div>
+              <p className="font-bold text-2xl text-gray-900 mt-3">Rp 120.000</p>
+            </div>
+            <p className="text-xs text-emerald-600 font-medium mt-4">
+              +2% ↗ <span className="text-dark-gray">compared to last month</span>
+            </p>
+          </div>
 
-      <div className="max-w-7xl mx-auto px-4 -mt-16 lg:mt-0">
+          <div className="bg-white p-6 rounded-2xl border border-dark-gray/10 shadow-sm flex flex-col justify-between">
+            <div>
+              <div className="flex items-center gap-2 text-emerald-500">
+                <FaMoneyBillTrendUp className="text-2xl" />
+                <span className="text-dark-gray text-xs font-semibold uppercase tracking-wider">
+                  Total Income
+                </span>
+              </div>
+              <p className="font-bold text-2xl text-gray-900 mt-3">Rp 2.120.000</p>
+            </div>
+            <p className="text-xs text-emerald-600 font-medium mt-4">+11.01% ↗</p>
+          </div>
+
+          <div className="bg-white p-6 rounded-2xl border border-dark-gray/10 shadow-sm flex flex-col justify-between">
+            <div>
+              <div className="flex items-center gap-2 text-rose-500">
+                <FaMoneyBillTransfer className="text-2xl" />
+                <span className="text-dark-gray text-xs font-semibold uppercase tracking-wider">
+                  Total Expense
+                </span>
+              </div>
+              <p className="font-bold text-2xl text-gray-900 mt-3">Rp 200.000</p>
+            </div>
+            <p className="text-xs text-rose-500 font-medium mt-4">-5.06% ↘</p>
+          </div>
+        </div>
+
+        <div className="bg-white p-5 rounded-2xl border border-dark-gray/10 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <h2 className="font-bold text-base text-gray-900">Fast Services</h2>
+            <p className="text-xs text-dark-gray mt-0.5">Quickly top up or send money anytime.</p>
+          </div>
+          <div className="flex items-center gap-3">
+            <button
+              onClick={() => navigate("/topup")}
+              className="bg-primary hover:bg-primary/90 text-white px-6 py-2.5 rounded-xl flex items-center justify-center gap-2 font-medium text-sm transition shadow-sm cursor-pointer"
+            >
+              <BiExport className="text-lg" />
+              <span>Top Up</span>
+            </button>
+            <button
+              onClick={() => navigate("/transfer")}
+              className="bg-white border border-dark-gray/30 hover:bg-gray-50 text-gray-800 px-6 py-2.5 rounded-xl flex items-center justify-center gap-2 font-medium text-sm transition cursor-pointer"
+            >
+              <FaRegPaperPlane className="text-sm" />
+              <span>Transfer</span>
+            </button>
+          </div>
+        </div>
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-          <div className="lg:col-span-2 space-y-6">
-            <div className="block lg:hidden bg-white rounded-3xl p-6 shadow-lg relative overflow-hidden">
-              <div className="relative z-10 grid grid-cols-3 gap-2 text-center">
-                <div>
-                  <p className="text-gray-400 text-xs font-medium">Balance</p>
-                  <p className="font-bold text-sm text-gray-800 mt-1">
-                    Rp. 500.000
-                  </p>
-                </div>
-
-                <div>
-                  <p className="text-gray-400 text-xs font-medium">Income</p>
-                  <p className="font-bold text-sm text-gray-800 mt-1">
-                    Rp. 500.000
-                  </p>
-                  <p className="text-[10px] text-emerald-500 font-semibold mt-2">
-                    +11.01% ↗
-                  </p>
-                </div>
-
-                <div>
-                  <p className="text-gray-400 text-xs font-medium">Expense</p>
-                  <p className="font-bold text-sm text-gray-800 mt-1">
-                    Rp. 500.000
-                  </p>
-                  <p className="text-[10px] text-rose-500 font-semibold mt-2">
-                    -5.06% ↘
-                  </p>
-                </div>
+          <div className="lg:col-span-2 bg-white p-6 rounded-2xl border border-dark-gray/10 shadow-sm">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="font-bold text-base text-gray-900">Analytics</h2>
+              <div className="flex gap-2">
+                <select className="bg-gray-50 border border-gray-200 text-gray-700 text-xs py-1.5 px-3 rounded-lg outline-none cursor-pointer">
+                  <option value="income">Income</option>
+                  <option value="expense">Expense</option>
+                </select>
+                <select className="bg-gray-50 border border-gray-200 text-gray-700 text-xs py-1.5 px-3 rounded-lg outline-none cursor-pointer">
+                  <option value="7">Last 7 Days</option>
+                  <option value="30">Last 30 Days</option>
+                </select>
               </div>
             </div>
-
-            <div className="hidden lg:grid grid-cols-3 gap-4">
-              <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center gap-2 text-primary">
-                    <GiMoneyStack className="text-xl" />
-                    <span className="text-gray-400 text-sm font-medium">
-                      Balance
-                    </span>
-                  </div>
-                  <p className="font-bold text-2xl text-gray-800 mt-2">
-                    Rp.120.000
-                  </p>
-                </div>
-                <p className="text-xs text-emerald-500 font-medium mt-4">
-                  +2% ↗ <span className="text-gray-400">3 Days Ago</span>
-                </p>
-              </div>
-
-              <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center gap-2 text-primary">
-                    <FaMoneyBillTrendUp className="text-xl" />
-                    <span className="text-gray-400 text-sm font-medium">
-                      Income
-                    </span>
-                  </div>
-                  <p className="font-bold text-2xl text-gray-800 mt-2">
-                    Rp2.120.000
-                  </p>
-                </div>
-                <p className="text-xs text-emerald-500 font-medium mt-4">
-                  +11.01% ↗
-                </p>
-              </div>
-
-              <div className="bg-white p-5 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center gap-2 text-primary">
-                    <FaMoneyBillTransfer className="text-xl" />
-                    <span className="text-gray-400 text-sm font-medium">
-                      Expense
-                    </span>
-                  </div>
-                  <p className="font-bold text-2xl text-gray-800 mt-2">
-                    Rp.200.000
-                  </p>
-                </div>
-                <p className="text-xs text-rose-500 font-medium mt-4">
-                  -5.06% ↘
-                </p>
-              </div>
-            </div>
-
-            <div className="flex lg:hidden items-center justify-between gap-4 my-6 text-white">
-              <button
-                onClick={() => navigate("/topup")}
-                className="bg-primary flex-1 flex items-center justify-center py-3.5 rounded-xl cursor-pointer gap-2 font-medium shadow-md hover:opacity-95 transition-opacity">
-                <BiExport className="text-xl" />
-                <span>Top Up</span>
-              </button>
-
-              <button
-                onClick={() => navigate("/transfer")}
-                className="bg-primary flex-1 flex items-center justify-center py-3.5 rounded-xl cursor-pointer gap-2 font-medium shadow-md hover:opacity-95 transition-opacity">
-                <FaRegPaperPlane className="text-lg" />
-                <span>Transfer</span>
-              </button>
-            </div>
-
-            <div className="hidden lg:flex bg-white p-5 rounded-2xl shadow-sm border border-gray-100 items-center justify-between">
-              <div className="font-bold text-gray-900 text-base">
-                Fast Service
-              </div>
-              <div className="flex items-center gap-3">
-                <button
-                  onClick={() => navigate("/topup")}
-                  className="bg-primary hover:bg-primary/80 cursor-pointer text-white px-6 py-2.5 rounded-xl flex items-center justify-center gap-2 font-medium text-sm transition-colors shadow-sm">
-                  <BiExport className="text-lg" />
-                  <span>Top Up</span>
-                </button>
-                <button
-                  onClick={() => navigate("/transfer")}
-                  className="bg-primary hover:bg-primary/80 cursor-pointer text-white px-6 py-2.5 rounded-xl flex items-center justify-center gap-2 font-medium text-sm transition-colors shadow-sm">
-                  <FaRegPaperPlane className="text-base" />
-                  <span>Transfer</span>
-                </button>
-              </div>
-            </div>
-
-            <div className="bg-white p-5 lg:p-6 rounded-2xl shadow-sm border border-gray-100">
-              <div className="flex items-center justify-between mb-6">
-                <div className="font-bold text-sm lg:text-lg text-gray-900">
-                  Income Chart
-                </div>
-                <div className="flex gap-2">
-                  <select className="bg-gray-100 text-gray-700 text-sm py-1.5 px-3 rounded-xl outline-none cursor-pointer font-medium">
-                    <option value="income">Income</option>
-                    <option value="outcome">Outcome</option>
-                  </select>
-                  <select className="bg-gray-100 text-gray-700 text-sm py-1.5 px-3 rounded-xl outline-none cursor-pointer font-medium">
-                    <option value="7">7 Days</option>
-                    <option value="30">1 Month</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="h-56 lg:h-64 w-full">
-                <Bar data={data} options={options} />
-              </div>
-            </div>
-
-            <div className="block lg:hidden mt-8">
-              <div className="flex items-center justify-between mb-4">
-                <div className="font-bold text-lg text-gray-900">
-                  Transaction History
-                </div>
-                <button className="text-primary text-sm font-semibold hover:underline">
-                  See All
-                </button>
-              </div>
-
-              <div className="space-y-4">
-                {transactionsMob.map((c) => (
-                  <div key={c.id} className="flex items-center justify-between">
-                    <div className="flex items-center gap-3">
-                      <img
-                        src={c.avatar}
-                        alt={c.name}
-                        className="w-12 h-12 rounded-2xl object-cover"
-                      />
-                      <div>
-                        <h3 className="font-bold text-gray-900 text-sm">
-                          {c.name}
-                        </h3>
-                        <p className="text-gray-400 text-xs">{c.type}</p>
-                      </div>
-                    </div>
-                    <span
-                      className={`font-bold text-sm ${
-                        c.isIncome ? "text-emerald-500" : "text-rose-500"
-                      }`}>
-                      {c.amount}
-                    </span>
-                  </div>
-                ))}
-              </div>
+            <div className="h-64 w-full">
+              <Bar data={data} options={options} />
             </div>
           </div>
 
-          <div className="hidden lg:block bg-white p-6 rounded-2xl shadow-sm border border-gray-100 h-fit">
-            <div className="flex items-center justify-between mb-6">
-              <div className="font-bold text-lg text-gray-900">
-                Transaction History
-              </div>
-              <button className="text-primary text-sm font-semibold hover:underline">
+          <div className="bg-white p-6 rounded-2xl border border-dark-gray/10 shadow-sm">
+            <div className="flex items-center justify-between mb-4">
+              <h2 className="font-bold text-base text-gray-900">Recent Transactions</h2>
+              <button
+                onClick={() => navigate("/history")}
+                className="text-primary text-xs font-semibold hover:underline cursor-pointer"
+              >
                 See All
               </button>
             </div>
-
-            <div className="space-y-4">
-              {transactionsDesk.map((c) => (
-                <div key={c.id} className="flex items-center justify-between">
+            <div className="divide-y divide-gray-100">
+              {transactions.map((item) => (
+                <div key={item.id} className="py-3 flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <img
-                      src={c.avatar}
-                      alt={c.name}
-                      className="w-11 h-11 rounded-2xl object-cover"
+                      src={item.avatar}
+                      alt={item.name}
+                      className="w-10 h-10 rounded-xl object-cover border border-gray-100"
                     />
                     <div>
-                      <h3 className="font-bold text-gray-900 text-sm">
-                        {c.name}
-                      </h3>
-                      <p className="text-gray-400 text-xs">{c.type}</p>
+                      <p className="font-semibold text-gray-900 text-sm">{item.name}</p>
+                      <p className="text-dark-gray text-xs">{item.type}</p>
                     </div>
                   </div>
                   <span
-                    className={`font-bold text-sm ${
-                      c.isIncome ? "text-emerald-500" : "text-rose-500"
-                    }`}>
-                    {c.amount}
+                    className={`font-semibold text-sm ${
+                      item.isIncome ? "text-emerald-600" : "text-rose-500"
+                    }`}
+                  >
+                    {item.amount}
                   </span>
                 </div>
               ))}

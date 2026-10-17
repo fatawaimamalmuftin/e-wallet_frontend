@@ -2,6 +2,7 @@ import { useForm, useWatch } from "react-hook-form";
 import { usePinInput } from "../../hooks/UsePinInput";
 import { NavLink } from "react-router";
 import gambarPin from "../../assets/pin.svg";
+
 export default function PinPage() {
   const {
     register,
@@ -27,9 +28,7 @@ export default function PinPage() {
 
   const onSubmit = (data) => {
     const isComplete = data.pin.every((digit) => digit !== "");
-    if (!isComplete) {
-      return;
-    }
+    if (!isComplete) return;
 
     const fullPin = data.pin.join("");
     console.log("PIN Submitted:", fullPin);
@@ -38,32 +37,31 @@ export default function PinPage() {
   const hasPinError = Array.isArray(errors.pin) && errors.pin.some(Boolean);
 
   return (
-    <main className="min-h-screen grid grid-cols-1 md:grid-cols-2">
-      <div className="flex min-h-screen items-center justify-center bg-primary p-4 md:bg-white">
-        <div className="w-full max-w-sm rounded-3xl bg-white p-8 shadow-xl">
-          <div className="mb-6 flex items-center gap-2">
-            <img src="/LOGO.png" alt="logo-aps" className="h-8" />
-            <h1 className="text-xl font-bold text-primary">E-Wallet</h1>
+    <main className="min-h-screen grid grid-cols-1 md:grid-cols-2 bg-gray-50 md:bg-white">
+      <div className="py-8 px-6 flex justify-center items-center">
+        <section className="w-full max-w-md flex flex-col gap-5">
+          <div className="flex items-center gap-2">
+            <img src="/LOGO.png" alt="logo" className="h-8 w-8 object-contain" />
+            <span className="text-xl font-bold text-primary">E-Wallet</span>
           </div>
 
-          <h2 className="text-lg font-bold text-gray-800">Enter Your Pin 👋</h2>
-          <p className="mt-1 text-sm text-gray-400">
-            Please save your pin because this so important.
-          </p>
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900">Set Up Your PIN 👋</h1>
+            <p className="text-sm text-dark-gray mt-1">
+              Create a 6-digit security PIN to authorize transactions.
+            </p>
+          </div>
 
-        <form onSubmit={handleSubmit(onSubmit)} className="mt-8">
-          <div className="flex justify-between gap-2">
-            {[0, 1, 2, 3, 4, 5].map((index) => {
-              const { ref: registerRef, ...restRegister } = register(
-                `pin.${index}`,
-                {
-                  required: "PIN must be filled in completely",
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+            <div className="flex justify-between gap-2">
+              {[0, 1, 2, 3, 4, 5].map((index) => {
+                const { ref: registerRef, ...restRegister } = register(`pin.${index}`, {
+                  required: "Required",
                   pattern: {
                     value: /^[0-9]$/,
-                    message: "The PIN must be a number",
+                    message: "Number only",
                   },
-                },
-              );
+                });
 
                 const isInputError = errors.pin?.[index];
 
@@ -81,44 +79,42 @@ export default function PinPage() {
                     }}
                     onChange={(e) => handleChange(e, index)}
                     onKeyDown={(e) => handleKeyDown(e, index)}
-                    className={`h-12 w-10 border-b-2 text-center text-xl font-bold text-gray-800 transition-colors focus:outline-none ${
+                    className={`w-10 sm:w-12 h-12 text-center text-lg font-bold rounded-xl border transition-colors outline-none ${
                       isInputError
-                        ? "border-red-500 text-red-500"
-                        : "border-gray-200 focus:border-primary"
+                        ? "border-red-500 text-red-500 bg-red-50"
+                        : "border-dark-gray/30 focus:border-primary focus:ring-1 focus:ring-primary"
                     }`}
                   />
                 );
               })}
             </div>
 
-          <div className="mt-2 h-6">
-            {hasPinError && (
-              <p className="text-xs text-red-500">
-                {errors.pin.find((err) => err?.message)?.message ||
-                  "PIN not complete"}
-              </p>
-            )}
-          </div>
+            <div className="min-h-[1.25rem]">
+              {hasPinError && (
+                <p className="text-xs text-red-500 text-center">
+                  {errors.pin.find((err) => err?.message)?.message || "PIN is incomplete"}
+                </p>
+              )}
+            </div>
 
             <button
               type="submit"
-              className="mt-6 w-full rounded-xl bg-primary py-3.5 text-base font-semibold text-white shadow-md transition-colors hover:bg-primary/90 active:bg-primary cursor-pointer">
-              Submit
+              className="w-full bg-primary text-white font-medium py-3 rounded-xl hover:bg-primary/90 transition shadow-sm cursor-pointer"
+            >
+              Submit PIN
             </button>
           </form>
 
-          <div className="mt-6 text-center text-sm text-gray-500">
-            Forgot Your Pin?{" "}
-            <NavLink
-              to="/forgot"
-              className="font-semibold text-primary hover:underline">
+          <p className="text-center text-sm text-dark-gray">
+            Forgot your PIN?{" "}
+            <NavLink to="/auth/forgot" className="text-primary font-semibold hover:underline">
               Reset
             </NavLink>
-          </div>
-        </div>
+          </p>
+        </section>
       </div>
 
-      <div className="hidden md:flex bg-primary items-center justify-center px-8 pt-10 relative overflow-hidden rounded-l-[40px]">
+      <div className="hidden md:flex bg-primary items-center justify-center p-8 relative overflow-hidden rounded-l-[40px]">
         <div className="w-full max-w-lg flex justify-center items-center">
           <img
             src={gambarPin}

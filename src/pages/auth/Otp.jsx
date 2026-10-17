@@ -27,95 +27,88 @@ export default function Otp() {
 
   const onSubmit = (data) => {
     const isComplete = data.otp.every((digit) => digit !== "");
-    if (!isComplete) {
-      return;
-    }
+    if (!isComplete) return;
 
-    const fullPin = data.otp.join("");
-    console.log("PIN Submitted:", fullPin);
+    const fullOtp = data.otp.join("");
+    console.log("OTP Submitted:", fullOtp);
   };
 
-  const hasPinError = Array.isArray(errors.otp) && errors.otp.some(Boolean);
+  const hasOtpError = Array.isArray(errors.otp) && errors.otp.some(Boolean);
 
   return (
-    <section className="bg-primary min-h-screen flex justify-center items-center">
-      <div>
-        <div className="bg-white py-8 px-4 lg:px-8 rounded-2xl flex flex-col gap-4 shadow-3xl">
-          <div className="flex items-center gap-2 min-w-full">
-            <img src="/LOGO.png" alt="logo-aps" className="h-8 w-8" />
-            <div className="text-primary font-semibold text-sm">E-Wallet</div>
-          </div>
-
-          <div className="text-xl lg:text-xl">Enter Your OTP 👋</div>
-
-          <div className="text-sm text-dark-gray lg:text-medium">
-            Please save your otp because this so important.
-          </div>
-
-          <form
-            onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col gap-2 shadow-3xl">
-            <div className="flex justify-center gap-2">
-              {[0, 1, 2, 3, 4, 5].map((index) => {
-                const { ref: registerRef, ...restRegister } = register(
-                  `otp.${index}`,
-                  {
-                    required: "PIN must be filled in completely",
-                    pattern: {
-                      value: /^[0-9]$/,
-                      message: "The PIN must be a number",
-                    },
-                  },
-                );
-
-                const isInputError = errors.otp?.[index];
-
-                return (
-                  <input
-                    key={index}
-                    {...restRegister}
-                    type="password"
-                    inputMode="numeric"
-                    maxLength={1}
-                    value={pinValues[index] || ""}
-                    ref={(e) => {
-                      registerRef(e);
-                      inputRefs.current[index] = e;
-                    }}
-                    onChange={(e) => handleChange(e, index)}
-                    onKeyDown={(e) => handleKeyDown(e, index)}
-                    className={`h-10 w-8 border-b-2 text-center text-xs font-bold text-gray-800 transition-colors focus:outline-none ${
-                      isInputError
-                        ? "border-red-500 text-red-500"
-                        : "border-gray-200 focus:border-primary"
-                    }`}
-                  />
-                );
-              })}
-            </div>
-
-            <div>
-              <p className="mt-2 text-xs sm:text-xs h-6 text-red-500">
-                {hasPinError &&
-                  (errors.otp.find((err) => err?.message)?.message ||
-                    "OTP not complete")}
-              </p>
-            </div>
-
-            <button className="bg-primary rounded-lg text-white text-sm py-2 hover:opacity-80 cursor-pointer hover:shadow-lg">
-              Submit
-            </button>
-          </form>
-
-          <div className="text-center text-sm text-gray-500">
-            Forgot Your Otp?{" "}
-            <NavLink
-              to="/"
-              className="font-semibold text-primary hover:underline">
-              Reset
-            </NavLink>
-          </div>
+    <section className="bg-primary min-h-screen flex justify-center items-center p-4">
+      <div className="w-full max-w-md rounded-2xl bg-white p-6 sm:p-8 shadow-2xl flex flex-col gap-5">
+        <div className="flex items-center gap-2">
+          <img src="/LOGO.png" alt="logo" className="h-8 w-8 object-contain" />
+          <span className="text-xl font-bold text-primary">E-Wallet</span>
         </div>
+
+        <div>
+          <h1 className="text-2xl font-bold text-gray-900">Enter Your OTP 👋</h1>
+          <p className="text-sm text-dark-gray mt-1">
+            We have sent a 6-digit verification code to your email.
+          </p>
+        </div>
+
+        <form onSubmit={handleSubmit(onSubmit)} className="space-y-4">
+          <div className="flex justify-between gap-2">
+            {[0, 1, 2, 3, 4, 5].map((index) => {
+              const { ref: registerRef, ...restRegister } = register(`otp.${index}`, {
+                required: "Required",
+                pattern: {
+                  value: /^[0-9]$/,
+                  message: "Number only",
+                },
+              });
+
+              const isInputError = errors.otp?.[index];
+
+              return (
+                <input
+                  key={index}
+                  {...restRegister}
+                  type="password"
+                  inputMode="numeric"
+                  maxLength={1}
+                  value={pinValues[index] || ""}
+                  ref={(e) => {
+                    registerRef(e);
+                    inputRefs.current[index] = e;
+                  }}
+                  onChange={(e) => handleChange(e, index)}
+                  onKeyDown={(e) => handleKeyDown(e, index)}
+                  className={`w-10 sm:w-12 h-12 text-center text-lg font-bold rounded-xl border transition-colors outline-none ${
+                    isInputError
+                      ? "border-red-500 text-red-500 bg-red-50"
+                      : "border-dark-gray/30 focus:border-primary focus:ring-1 focus:ring-primary"
+                  }`}
+                />
+              );
+            })}
+          </div>
+
+          <div className="min-h-[1.25rem]">
+            {hasOtpError && (
+              <p className="text-xs text-red-500 text-center">
+                {errors.otp.find((err) => err?.message)?.message || "OTP is incomplete"}
+              </p>
+            )}
+          </div>
+
+          <button
+            type="submit"
+            className="w-full bg-primary text-white font-medium py-3 rounded-xl hover:bg-primary/90 transition shadow-sm cursor-pointer"
+          >
+            Confirm OTP
+          </button>
+        </form>
+
+        <p className="text-center text-sm text-dark-gray">
+          Didn&apos;t get code?{" "}
+          <NavLink to="/auth/forgot" className="text-primary font-semibold hover:underline">
+            Resend
+          </NavLink>
+        </p>
       </div>
     </section>
   );

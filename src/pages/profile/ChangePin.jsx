@@ -1,28 +1,100 @@
+import { useForm, useWatch } from "react-hook-form";
+import { usePinInput } from "../../hooks/UsePinInput";
+
 const ChangePin = () => {
+  const {
+    register,
+    handleSubmit,
+    setValue,
+    getValues,
+    control,
+    formState: { errors },
+  } = useForm({
+    defaultValues: {
+      pin: ["", "", "", "", "", ""],
+    },
+  });
+
+  const pinValues = useWatch({ control, name: "pin" });
+
+  const { inputRefs, handleChange, handleKeyDown } = usePinInput({
+    length: 6,
+    setValue,
+    getValues,
+    name: "pin",
+  });
+
+  const onSubmit = (data) => {
+    const isComplete = data.pin.every((digit) => digit !== "");
+    if (!isComplete) return;
+
+    const fullPin = data.pin.join("");
+    console.log("PIN Updated:", fullPin);
+  };
+
+  const hasPinError = Array.isArray(errors.pin) && errors.pin.some(Boolean);
+
   return (
-    <section>
-      <div className="flex items-center justify-center h-full">
-        <div className="w-10/12 lg:w-4/12 h-6/12 lg:h-8/12 rounded-lg bg-white p-8 flex flex-col justify-between">
-          <div>
-            <div className="py-4">
-              <p className="text-lg font-semibold lg:text-sm">
-                Enter Your Pin 👋
-              </p>
-              <p className="text-dark-gray lg:text-sm">
-                Enter Your Pin For Transaction
-              </p>
-            </div>
-          </div>
-          <div className="flex gap-2 justify-around">
-            <div className="grid grid-cols-6 gap-2 lg:gap-4">{/* pin */}</div>
-          </div>
-          <div className="grid gap-4 mt-8 text-center">
-            <button className="py-4 lg:py-2 lg:text-sm bg-primary w-full text-white rounded-lg cursor-pointer hover:opacity-90 hover:shadow-lg">
-              Submit
-            </button>
-          </div>
-        </div>
+    <section className="bg-white rounded-2xl border border-dark-gray/10 p-6 sm:p-8 shadow-sm max-w-lg">
+      <div className="mb-6">
+        <h1 className="text-xl font-bold text-gray-900">Change PIN</h1>
+        <p className="text-sm text-dark-gray mt-1">
+          Enter a new 6-digit security PIN for authorizing transactions.
+        </p>
       </div>
+
+      <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
+        <div className="flex justify-between gap-2">
+          {[0, 1, 2, 3, 4, 5].map((index) => {
+            const { ref: registerRef, ...restRegister } = register(`pin.${index}`, {
+              required: "Required",
+              pattern: {
+                value: /^[0-9]$/,
+                message: "Number only",
+              },
+            });
+
+            const isInputError = errors.pin?.[index];
+
+            return (
+              <input
+                key={index}
+                {...restRegister}
+                type="password"
+                inputMode="numeric"
+                maxLength={1}
+                value={pinValues[index] || ""}
+                ref={(e) => {
+                  registerRef(e);
+                  inputRefs.current[index] = e;
+                }}
+                onChange={(e) => handleChange(e, index)}
+                onKeyDown={(e) => handleKeyDown(e, index)}
+                className={`w-10 sm:w-12 h-12 text-center text-lg font-bold rounded-xl border transition-colors outline-none ${
+                  isInputError
+                    ? "border-red-500 text-red-500 bg-red-50"
+                    : "border-dark-gray/30 focus:border-primary focus:ring-1 focus:ring-primary"
+                }`}
+              />
+            );
+          })}
+        </div>
+
+        <div className="min-h-[1.25rem]">
+          {hasPinError && (
+            <p className="text-xs text-red-500 text-center">
+              {errors.pin.find((err) => err?.message)?.message || "PIN is incomplete"}
+            </p>
+          )}
+        </div>
+
+        <button
+          type="submit"
+          className="w-full sm:w-auto px-8 py-3 bg-primary text-white font-medium text-sm rounded-xl hover:bg-primary/90 transition shadow-sm cursor-pointer"
+        >
+          Save PIN
+        </button>
+      </form>
     </section>
   );
 };
